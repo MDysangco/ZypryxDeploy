@@ -3,8 +3,8 @@ version: "3.9"
 services:
   zypryx-api:
     build:
-      context: ../ZypryxAPI/ZypryxAPI
-      dockerfile: Dockerfile
+      context: ../ZypryxAPI       
+      dockerfile: ZypryxAPI/Dockerfile
     container_name: zypryx-api
     ports:
       - "8080:8080"
@@ -14,8 +14,8 @@ services:
 
   kline-tasker:
     build:
-      context: ../KlineTasker/TrenchLooter
-      dockerfile: Dockerfile
+      context: ../KlineTasker 
+      dockerfile: TrenchLooter/Dockerfile
     container_name: kline-tasker
     environment:
       ASPNETCORE_ENVIRONMENT: "Production"
