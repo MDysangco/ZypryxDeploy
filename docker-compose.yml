@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  zypryx-api:
+    build:
+      context: ../ZypryxAPI/ZypryxAPI
+      dockerfile: Dockerfile
+    container_name: zypryx-api
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ConnectionStrings__DefaultConnection: "${DB_CONNECTION}"
+      Jwt__Key: "${JWT_KEY}"
+    restart: always
+
+  kline-tasker:
+    build:
+      context: ../KlineTasker/TrenchLooter
+      dockerfile: Dockerfile
+    container_name: kline-tasker
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ConnectionStrings__DefaultConnection: "${DB_CONNECTION}"
+      Api__BaseUrl: "http://zypryx-api:8080"
+    depends_on:
+      - zypryx-api
+    restart: always
