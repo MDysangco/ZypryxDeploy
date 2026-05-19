@@ -3,23 +3,11 @@ version: "3.9"
 services:
   zypryx-api:
     build:
-      context: ../ZypryxAPI       
-      dockerfile: ZypryxAPI/Dockerfile
+      context: ../ZypryxAPI/ZypryxAPI
+      dockerfile: Dockerfile
     container_name: zypryx-api
     ports:
       - "8080:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: "Production"
-    restart: always
-
-  kline-tasker:
-    build:
-      context: ../KlineTasker 
-      dockerfile: TrenchLooter/Dockerfile
-    container_name: kline-tasker
-    environment:
-      ASPNETCORE_ENVIRONMENT: "Production"
-      Api__BaseUrl: "http://zypryx-api:8080"
-    depends_on:
-      - zypryx-api
     restart: always
